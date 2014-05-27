@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+
+    meta(name="viewport" content="width=device-width, maximum-scale=1, user-scalable=no")
+    meta(name="mobile-web-app-capable" content="yes")
+    meta(name="apple-mobile-web-app-capable" content="yes")
+    meta(name="apple-mobile-web-app-status-bar-style" content="black")
+
+    // shims for backwards compatibility
+    script(type="text/javascript" src="http://code.famo.us/lib/functionPrototypeBind.js")
+    script(type="text/javascript" src="http://code.famo.us/lib/classList.js")
+    script(type="text/javascript" src="http://code.famo.us/lib/requestAnimationFrame.js")
+
+    // module loader
+    script(type="text/javascript" src="http://code.famo.us/lib/require.js")
+
+    // famous
+    link(rel="stylesheet" type="text/css" href="http://code.famo.us/famous/0.2/famous.css")
+    script(type="text/javascript" src="http://code.famo.us/famous/0.2/famous.min.js")
+
+    // app code
+    link(rel="stylesheet" type="text/css" href="app.css")
+    script(type="text/javascript").
+      require.config({
+        baseUrl: './'
+      });
+      require(['app']);
+
+    title famous
+  body
