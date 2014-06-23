@@ -5,11 +5,14 @@ define (require, exports, module) ->
   Transform     = require 'famous/core/Transform'
   StateModifier = require 'famous/modifiers/StateModifier'
   PageView      = require 'views/PageView'
+  MenuView      = require 'views/MenuView'
+  StripData     = require 'data/StripData'
 
   AppView = ->
     View.apply @, arguments
     @menuToggle = false
     _createPageView.call @
+    _createMenuView.call @
     _setListeners.call @
     false
 
@@ -39,6 +42,13 @@ define (require, exports, module) ->
     @pageView = new PageView()
     @pageModifier = new StateModifier()
     @.add(@pageModifier).add(@pageView)
+
+  _createMenuView = ->
+    @menuView = new MenuView
+      stripData: StripData
+    menuModifier = new StateModifier
+      transform: Transform.behind
+    @.add(menuModifier).add(@menuView)
 
   _setListeners = ->
     @pageView.on 'menuToggle', @toggleMenu.bind(@)
